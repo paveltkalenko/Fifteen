@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 public class Game {
 	private LevelDifficult ld;
 	private JLabel ClickCounterLabel;
-	enum direction {toLeft,toRight,toUp,toDown};
+	enum direction {toLeft,toRight,toUp,toDown}
 	private int ClickCount;
 	Main parentframe;
 	private QuadrateBlock qb[];
@@ -16,8 +16,8 @@ public class Game {
 		ClickCounterLabel.setText("Кол-во перемещений: "+ClickCount);
 
 		this.ld = parentframe.leveldifficult;
-		qb = new QuadrateBlock[ld.всегоячеек()];
-	    for (int i=0; i<ld.всегоячеек();i++)
+		qb = new QuadrateBlock[ld.totalcells()];
+	    for (int i = 0; i<ld.totalcells(); i++)
 	    {
 	    	qb[i]=new QuadrateBlock((byte)i);    
 	    }
@@ -27,7 +27,7 @@ public class Game {
 	    int chet;
 	    do
 	    {   chet=0;
-	    	for (int i=ld.всегоячеек()-1;i>0;i--) 
+	    	for (int i = ld.totalcells()-1; i>0; i--)
 	    	{
 	    		int d,tmp;	    	
 	    	
@@ -47,14 +47,14 @@ public class Game {
 	{
 		int chet=0;
 		int tmp=0;
-		for (int i=0;i<ld.всегоячеек();i++)
+		for (int i = 0; i<ld.totalcells(); i++)
 		{
 			if (qb[i].value==0) 
 			{
 				tmp=(i/ld.getColumns())+1;
 				continue;
 			}
-			for (int i1=0;i1<ld.всегоячеек();i1++)
+			for (int i1 = 0; i1<ld.totalcells(); i1++)
 			{
 				if (qb[i1].value==0) continue;
 				if ((i1>i)&&(qb[i1].value<qb[i].value)) chet++; 	

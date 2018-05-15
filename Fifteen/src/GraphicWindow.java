@@ -6,7 +6,7 @@ import java.util.*;
 @SuppressWarnings("serial")
 public class GraphicWindow extends JPanel implements MouseListener{
 	private QuadrateBlock qb[];
-	enum direction {toLeft,toRight,toUp,toDown};
+	enum direction {toLeft,toRight,toUp,toDown}
 	private LevelDifficult ld;
 	Main parentframe;
 	private JLabel ClickCounterLabel;
@@ -14,7 +14,7 @@ public class GraphicWindow extends JPanel implements MouseListener{
 	{
 		this.parentframe = parentframe;
 		this.ld = parentframe.leveldifficult;	
-	//	TotalBlocks = this.ld.всегоячеек();
+	//	TotalBlocks = this.ld.totalcells();
 		BlocksPerLine = this.ld.getColumns();
 		
 		BlockSize=(byte)(this.getWidth()/ld.getColumns());
@@ -22,7 +22,8 @@ public class GraphicWindow extends JPanel implements MouseListener{
 		ClickCounterLabel=parentframe.ClickCounter;
 		//NewGameInitalisation();
 	    this.addMouseListener(this);
-	};
+	}
+
 	public void mousePressed(MouseEvent e)
 	{
 		int mx,my,gt,tmp;
@@ -31,7 +32,7 @@ public class GraphicWindow extends JPanel implements MouseListener{
 		mx = e.getX()/BlockSize;
 		my = e.getY()/BlockSize;
 		gt = my*ld.getColumns()+mx;
-		if (gt>=ld.всегоячеек()) {return;}
+		if (gt>=ld.totalcells()) {return;}
 		if (qb[gt].value != 0)
 		{
 			if (mx>0)
@@ -62,11 +63,11 @@ public class GraphicWindow extends JPanel implements MouseListener{
     	super.paintComponents(g);
      	Graphics2D gr = (Graphics2D)g;
      	gr.setColor(new Color(60,50,10));
-	//	TotalBlocks = this.ld.всегоячеек();
+	//	TotalBlocks = this.ld.totalcells();
 		BlocksPerLine =ld.getColumns();
      	BlockSize=getWidth()/ld.getColumns();
      	gr.fill3DRect(0, 0, BlockSize*ld.getColumns(), BlockSize*ld.getRow(),false);
-     	for (int i=0;i<ld.всегоячеек();i++)
+     	for (int i = 0; i<ld.totalcells(); i++)
      	{
      		int x,y;
      		x=(i % ld.getColumns());
@@ -107,14 +108,14 @@ public class GraphicWindow extends JPanel implements MouseListener{
 	{
 		int chet=0;
 		int tmp=0;
-		for (int i=0;i<ld.всегоячеек();i++)
+		for (int i = 0; i<ld.totalcells(); i++)
 		{
 			if (qb[i].value==0) 
 			{
 				tmp=(i/ld.getColumns())+1;
 				continue;
 			}
-			for (int i1=0;i1<ld.всегоячеек();i1++)
+			for (int i1 = 0; i1<ld.totalcells(); i1++)
 			{
 				if (qb[i1].value==0) continue;
 				if ((i1>i)&&(qb[i1].value<qb[i].value)) chet++; 	
@@ -132,11 +133,11 @@ public class GraphicWindow extends JPanel implements MouseListener{
 	public int TestEnd()
 	{
 		int b=0;
-		for (int i=0;i<(ld.всегоячеек()-1);i++)
+		for (int i = 0; i<(ld.totalcells()-1); i++)
 		{
 			if (qb[i].value==(i+1)) b++;
 		}
-		if (b==(ld.всегоячеек()-1)) 
+		if (b==(ld.totalcells()-1))
 		{
 			JOptionPane Dialog = new JOptionPane();
 		//	Locale lc = new Locale("es");
@@ -162,8 +163,8 @@ public class GraphicWindow extends JPanel implements MouseListener{
 		ClickCounterLabel.setText("Кол-во перемещений: "+ClickCount);
 
 		this.ld = parentframe.leveldifficult;
-		qb = new QuadrateBlock[ld.всегоячеек()];
-	    for (int i=0; i<ld.всегоячеек();i++)
+		qb = new QuadrateBlock[ld.totalcells()];
+	    for (int i = 0; i<ld.totalcells(); i++)
 	    {
 	    	qb[i]=new QuadrateBlock((byte)i);    
 	    }
@@ -172,8 +173,8 @@ public class GraphicWindow extends JPanel implements MouseListener{
 	    Random randomseq = new Random();
 	    int chet;
 	    do
-	    {   chet=0;
-	    	for (int i=ld.всегоячеек()-1;i>0;i--) 
+	    {
+	    	for (int i = ld.totalcells()-1; i>0; i--)
 	    	{
 	    		int d,tmp;	    	
 	    	
@@ -196,10 +197,10 @@ public class GraphicWindow extends JPanel implements MouseListener{
     
 	private int BlockSize=90;
 	
-	public void mouseReleased(MouseEvent e){};
-	public void mouseClicked(MouseEvent e){};
-	public void mouseEntered(MouseEvent e){};
-	public void mouseExited(MouseEvent e){};
-	public void mouseMoved(MouseEvent e){};
+	public void mouseReleased(MouseEvent e){}
+	public void mouseClicked(MouseEvent e){}
+	public void mouseEntered(MouseEvent e){}
+	public void mouseExited(MouseEvent e){}
+	public void mouseMoved(MouseEvent e){}
 	
 }

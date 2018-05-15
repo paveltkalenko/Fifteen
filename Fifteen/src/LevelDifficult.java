@@ -2,33 +2,33 @@ public class LevelDifficult {
 	/**
 	 * 
 	 */
-	private int столбцов;
-	private int строк;
+	private int columns;
+	private int rows;
 
-	public int всегоячеек(){return столбцов*строк;}
-	public int getColumns(){return столбцов;}
-	public int getRow(){return строк;}
+	public int totalcells(){return columns * rows;}
+	public int getColumns(){return columns;}
+	public int getRow(){return rows;}
 	LevelDifficult()
 	{
-		столбцов=4;
-		строк=4;
+		columns =4;
+		rows =4;
 	}
 	LevelDifficult(LevelDifficult ld)
 	{
-		столбцов = ld.столбцов;
-		строк=ld.строк;
+		columns = ld.columns;
+		rows =ld.rows;
 	}	
 	LevelDifficult(int Columns,int Row)
 	{
-		столбцов=Columns;
-		строк=Row;
+		columns =Columns;
+		rows =Row;
 	
 	}
 	public boolean isEquivalent(LevelDifficult LD)
 	{
-		if (LD.getColumns()==столбцов)
+		if (LD.getColumns()== columns)
 		{
-			if (LD.getRow()==строк) return true;
+			if (LD.getRow()== rows) return true;
 		}
 		return false;
 	}

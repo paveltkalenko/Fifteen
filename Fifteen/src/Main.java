@@ -13,10 +13,6 @@ public class Main extends JFrame implements ComponentListener
 	public BestResult bestresult;
 	public LevelDifficult leveldifficult;
 	public Timer myTime;
-	//public void NewGameInitalisation()
-	//{
-		
-	//}
 	public Main(String title)
 	{
 		setTitle(title);
@@ -37,7 +33,7 @@ public class Main extends JFrame implements ComponentListener
 		add(grWindow,BorderLayout.CENTER);		
 		add(stat_panel,BorderLayout.NORTH);
 		
-	  //  add(ClickCounter,BorderLayout.NORTH);
+
 	    bestresult = new BestResult();
 	    this.addComponentListener(this);
 	    mainmenu = new MainMenu(this);
@@ -51,8 +47,8 @@ public class Main extends JFrame implements ComponentListener
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         grWindow.NewGameInitalisation();
-      
-        myTime.run();
+      //  myTime.run();
+        myTime.start();
 		
 
 	}
@@ -64,42 +60,25 @@ public class Main extends JFrame implements ComponentListener
 
      UIManager.put("OptionPane.yesButtonText","Да");
      UIManager.put("OptionPane.noButtonText","Нет");
-     //UIManager.put("OptionPane.СфButtonText","Нет");
-     //Window.add()
-     
-     
-//     Window.setVisible(true);
+
 
    
 	}
-	public void componentHidden(ComponentEvent event){};
-	public void componentMoved(ComponentEvent event){};
+	public void componentHidden(ComponentEvent event){}
+	public void componentMoved(ComponentEvent event){}
 	public void componentShown(ComponentEvent event){}
 	@SuppressWarnings("deprecation")
 	public void componentResized(ComponentEvent event)
 	{
 
-		//  System.out.println("Window Resized");
 		Dimension d=this.getPreferredSize();
 		Dimension d2=this.getSize();
-		/*
-		if (d2.width!=d.width)
-		{
-			d2.height=d2.width+35;
-			this.setPreferredSize(d2);
-			this.setSize(d2);
-		}
-		*/
+
 		if (d2.height!=d.height)
 			{
-			//	d2.width=100;//d2.height+35;
-		//		setPreferredSize(d2);
 				setSize(d2);
 			}
-		
-		
-//		System.out.println("Preferred.wid");
-	 	//this.setSize(b,b+40);
+
 	}
 	
 }

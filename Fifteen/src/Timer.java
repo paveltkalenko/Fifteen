@@ -3,55 +3,55 @@ import javax.swing.*;
 //import java.
 public class Timer extends Thread {
     private JLabel LabelTimer;
-	private int CurrentTime;
-    private boolean can_running;
+	private volatile int CurrentTime;
+    private volatile boolean can_running;
 	public Timer(JLabel LT)
 	{
 		can_running=true;
 		LabelTimer=LT;
 		CurrentTime=0;
-		// TODO Auto-generated constructor stub
+
 	}
 
-  //  public void start()
- //   {
- //     try
-//      {
-    //	  while(can_running)
-    	//  {
- //   	  CurrentTime++;
- //   	  sleep(100);	  
-    //	  LabelTimer.setText("Затраченно времени: "+CurrentTime);
-    	 // LabelTimer.updateUI();
-    //	  }
- //     }
-      
-   //   catch(InterruptedException ex)
-   //   {
-    	  
- //     }
-      
-  //  }
+	@Override
     public void run()
     {
-    	try
-    	{
-    		
-    	  CurrentTime=0;
-    	  while(can_running)
-    	  {
-    	   CurrentTime++;
-    	  //sleep(100);
-    	  Thread.sleep(10);
-          LabelTimer.setText("Затраченно llвремени: "+CurrentTime);
-         // if (CurrentTime==100) can_running=false;
-    	  LabelTimer.updateUI();
-    	  }
-    	}
-    	catch (InterruptedException ex)
-        {
-      	  ex.printStackTrace();
-        }
+    	while(true)
+		{
+			CurrentTime = 0;
+			while (can_running)
+			{
+				if (!Thread.interrupted())
+				{
+
+					CurrentTime++;
+					//sleep(100)
+					int seconds = CurrentTime / 100;
+					int minutes = seconds / 60;
+					seconds %= 60;
+					String time = minutes+":" + seconds+"."+(CurrentTime%100);
+					LabelTimer.setText("Затраченно времени: " + time);
+					// if (CurrentTime==100) can_running=false;
+					LabelTimer.updateUI();
+
+					try
+					{
+						Thread.sleep(10);
+					} catch (InterruptedException ex)
+					{
+						ex.printStackTrace();
+					}
+				}
+				else
+				{
+						return;
+				}
+
+			}
+			Thread.yield();
+
+
+		}
 
       
     }

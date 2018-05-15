@@ -32,11 +32,9 @@ public class BestResult {
 		pn.add(new JLabel("Уровень сложности"));
 		pn.add(new JLabel("Кол-во ходов"));
 		pn.add(new JLabel("Время"));
-		for (int i=0;i<BestsResults.size();i++)
+		for (type_result tr : BestsResults)
 		{
-			type_result tr;
 			String ld;
-			tr = BestsResults.get(i);
 			ld = String.valueOf(tr.ld.getColumns()) + "x" + String.valueOf(tr.ld.getRow());
 			pn.add(new JLabel(ld));
 			pn.add(new JLabel(String.valueOf(tr.ClickCount)));
@@ -58,10 +56,12 @@ public class BestResult {
 	}
 	private void readresult()
 	{
+
 		try
 		{
 			FileInputStream fin = new FileInputStream(f);
 			DataInputStream datain = new DataInputStream(fin);
+
 			int size;
 			int rows;
 			int columns;
@@ -125,15 +125,14 @@ public class BestResult {
 		DataOutputStream dataout = new DataOutputStream(fout);
 	
 		dataout.writeInt(BestsResults.size());
-		//fout.write();
-		for (int i=0;i<BestsResults.size();i++)
+
+		for (type_result tr: BestsResults)
 		{
-			type_result tr;
-			tr = BestsResults.get(i);
-			dataout.writeInt(tr.ld.getColumns());
-			dataout.writeInt(tr.ld.getRow());
-			dataout.writeInt(tr.ClickCount);
-			dataout.writeInt(tr.Time);
+				dataout.writeInt(tr.ld.getColumns());
+				dataout.writeInt(tr.ld.getRow());
+				dataout.writeInt(tr.ClickCount);
+				dataout.writeInt(tr.Time);
+
 		}
 		dataout.close();
 		fout.close();
